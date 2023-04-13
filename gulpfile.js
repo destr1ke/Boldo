@@ -5,6 +5,7 @@ const concat = require("gulp-concat");
 const uglify = require("gulp-uglify-es").default;
 const autoprefixer = require("gulp-autoprefixer");
 const clean = require("gulp-clean");
+const imagemin = require("gulp-imagemin");
 
 function scripts() {
   return src("app/js/main.js")
@@ -19,7 +20,9 @@ function styles() {
     .pipe(scss({ outputStyle: "compressed" }))
     .pipe(dest("app/css"));
 }
-
+function images() {
+  src("app/images/*").pipe(imagemin()).pipe(dest("dist/images"));
+}
 function watching() {
   watch(["app/scss/style.scss"], styles);
   watch(["app/js/main.js"], scripts);
@@ -28,20 +31,13 @@ function cleanDist() {
   return src("dist").pipe(clean());
 }
 function building() {
-  return src(
-    [
-      "app/css/style.min.css",
-      "app/js/main.min.js",
-      "app/*.html",
-      "app/images/*",
-    ],
-    {
-      base: "app",
-    }
-  ).pipe(dest("dist"));
+  return src(["app/css/style.min.css", "app/js/main.min.js", "app/*.html"], {
+    base: "app",
+  }).pipe(dest("dist"));
 }
 
 exports.scripts = scripts;
 exports.styles = styles;
+exports.images = images;
 exports.watching = watching;
-exports.build = series(cleanDist, building);
+exports.build = series(cleanDist, building, images);
