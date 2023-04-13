@@ -156,11 +156,9 @@ a {
     flex-wrap: wrap;
     row-gap: 80px;
     column-gap: 50px;
-    // justify-content: space-between;
   }
   &__item {
     width: 300px;
-    // height: 424px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -226,7 +224,7 @@ a {
 }
 .feedback {
   background-color: #0a2640;
-  background-image: url(./images/bcg_feedback.png);
+  background-image: url(../images/bcg_feedback.png);
   background-repeat: no-repeat, no-repeat;
   width: 1200px;
   margin: 0 auto;
@@ -547,7 +545,6 @@ footer {
     }
   }
   .articles {
-    // padding: 10% 0 12.4% 0;
     width: 96%;
     &__heading {
       font-size: 40px;
